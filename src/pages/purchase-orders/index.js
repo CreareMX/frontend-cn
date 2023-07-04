@@ -102,7 +102,7 @@ const PersonsType = ({ apiData }) => {
 
     const rechazarOC = async(id) =>{
       try {
-       const response = await changeStatusReqById(id,10,1)
+       const response = await changeStatusReqById(id,8,1)
        if(response.status === 200){
          toast.success('Requisición rechazada correctamente')
          getRequesitions()
@@ -448,7 +448,8 @@ const PersonsType = ({ apiData }) => {
 
   const validarOC = async(id) =>{
     try {
-     const response = await changeStatusReqById(id,8,1)
+      //orden de compra pagada
+     const response = await changeStatusReqById(id,6,1)
      if(response.status === 200){
        toast.success('Orden de compra validada correctamente')
        getRequesitions()
@@ -461,7 +462,7 @@ const PersonsType = ({ apiData }) => {
 
 const cancelarOC = async(id) =>{
  try {
-  const response = await changeStatusReqById(id,9,1)
+  const response = await changeStatusReqById(id,7,1)
   if(response.status === 200){
     toast.success('Orden de compra cancelada correctamente')
     getRequesitions()
