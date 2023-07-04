@@ -101,7 +101,7 @@ const schema = yup.object().shape({
 })
 
 const defaultValues = {
-  password: 'admin1234',
+  password: 'admin',
   email: 'admin@cnseguridad.com'
 }
 
@@ -138,8 +138,8 @@ const LoginPage = () => {
     //   contrasena:password
     // }
        let dataLogin = {
-      nombreUsuario:'admin',
-      contrasena:'admin'
+      nombreUsuario:email,
+      contrasena:password
     }
     
     auth.login(dataLogin, () => {
