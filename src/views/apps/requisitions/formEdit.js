@@ -111,7 +111,7 @@ const FormLayoutsSeparator = () => {
         console.log("🚀 ~ file: form.js:110 ~ getPeople ~ response:", response)
         if(response.status === 200){
           
-          const proveedores = response.data.filter(e=>e.tipoPersona.nombre ==='PROVEEDOR')
+          const proveedores = response.data.filter(e=>e.idTipoPersona ===3)
           
           setProviders(proveedores)
           setLoading(false)
@@ -124,68 +124,36 @@ const FormLayoutsSeparator = () => {
   }
 
   const getWarehouse =  async() =>{
-    // try {
-    //   setLoading(true)
-    //     const response = await getAllWarehouse()
-    //     if(response.status === 200){
-    //       setWarehouse(response.data)
-    //       setLoading(false)
+    try {
+      setLoading(true)
+        const response = await getAllWarehouse()
+        if(response.status === 200){
+          setWarehouse(response.data)
+          setLoading(false)
 
-    //     }
-        
-    // } catch (error) {
-    //   console.log(error)
-    // }
-    const almacen = [
-        {
-            "id": 5,
-            "descripcion": "Almacem principal",
-            "nombre": "Mérida",
-            "codigo": "C12432",
-            "idTipoAlmacen": 1,
-        },
-        {
-            "id": 4,
-            "descripcion": "Almacen secundario",
-            "nombre": "Valladolid",
-            "codigo": "C43423",
-            "idTipoAlmacen": 3,
         }
-    ]
-        setWarehouse(almacen)
+        
+    } catch (error) {
+      console.log(error)
+    }
+
 
   }
 
   const getbranchOffices =  async() =>{
-    // try {
-    //   setLoading(true)
-    //     const response = await getAllBranchOffice()
-    //     if(response.status === 200){
-    //       setBranhOffice(response.data)
-    //       setLoading(false)
+    try {
+      setLoading(true)
+        const response = await getAllBranchOffice()
+        if(response.status === 200){
+          setBranhOffice(response.data)
+          setLoading(false)
 
-    //     }
-        
-    // } catch (error) {
-    //   console.log(error)
-    // }
-
-    const sucursales = [
-        {
-            "nombre": "Mérida",
-            "id": 1,
-            "domicilio": "C57 # 343 x70 y 72 Centro",
-            "telefono": "9994335363"
-        },
-        {
-            "nombre": "Valladolid",
-            "id": 2,
-            "domicilio": "C5h #435 x 20 y 24 Centro",
-            "telefono": "9236245356"
         }
-    ]
+        
+    } catch (error) {
+      console.log(error)
+    }
 
-    setBranhOffice(sucursales)
   }
 
   const getProductsbyProvider =  async() =>{
@@ -489,7 +457,7 @@ const FormLayoutsSeparator = () => {
       fechaCompromiso:date,
       fechaEnvio:date,
       idCliente: parseInt(providerSelected.id),
-      idEmpleadoCrea: 7,
+      idEmpleadoCrea: 3,
       idAlmacen: warehouseSelected.id,
       idSucursal: branchOfficeSelected.id,
       comentarios: comments,

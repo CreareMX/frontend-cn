@@ -70,6 +70,7 @@ import { useForm, Controller } from 'react-hook-form'
 
 // ** Data
 import { top100Films } from 'src/@fake-db/autocomplete'
+import { borderColor } from '@mui/system'
 
 const CustomInput = forwardRef((props, ref) => {
   return <TextField fullWidth {...props} inputRef={ref} label='Fecha' autoComplete='off' />
@@ -110,7 +111,7 @@ const FormLayoutsSeparator = () => {
         console.log("🚀 ~ file: form.js:110 ~ getPeople ~ response:", response)
         if(response.status === 200){
           
-          const proveedores = response.data.filter(e=>e.tipoPersona.nombre ==='PROVEEDOR')
+          const proveedores = response.data.filter(e=>e.idTipoPersona ===3)
           
           setProviders(proveedores)
           setLoading(false)
@@ -421,7 +422,7 @@ const FormLayoutsSeparator = () => {
 
     let dataReq = {
       idCliente: idProvider,
-      idEmpleadoCrea: 7,
+      idEmpleadoCrea: 3,
       fecha: date,
       fechaCompromiso:date,
       fechaEnvio:date,
@@ -538,6 +539,7 @@ const FormLayoutsSeparator = () => {
             onChange={(e, data) =>setWarehouseSelected(data)}
                 options={warehouse}
                 id='autocomplete-outlined'
+                classes={{border:'5px red solid'}}
                 getOptionLabel={option => option.nombre || ''}
                 renderInput={params => <TextField {...params} required label='Almacen' />}
             />
