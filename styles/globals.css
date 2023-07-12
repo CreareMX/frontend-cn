@@ -22,3 +22,27 @@ code:not([class*='language-']):after {
 code[class*='language-'] {
   padding: 0;
 }
+
+
+.MuiAutocomplete-listbox {
+  border:0.5px #b0b0b0 solid;
+  margin-top: 1px !important;
+  border-radius: 6px !important;
+  padding: 0 !important;
+}
+.MuiAutocomplete-option.Mui-focused {
+  background-color: #e6e6e6 !important;
+}
+
+.MuiAutocomplete-noOptions {
+  border:0.5px #b0b0b0 solid;
+  margin-top: 1px !important;
+  border-radius: 6px !important;
+  padding: 0 !important;
+  padding: 12px 10px !important;
+
+}
+
+.css-mlse1l-MuiAutocomplete-listbox .MuiAutocomplete-option {
+  padding: 12px 10px !important;
+}
