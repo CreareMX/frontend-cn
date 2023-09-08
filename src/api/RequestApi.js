@@ -121,7 +121,7 @@ export const getAllTyperPersons = async () =>{
 
    export const postWarehouse = async (data, idUser) =>{
     
-    const _URL = `/api/api/Almacen/Almacenes/${idUser}`;
+    const _URL = `/api/Almacen/Almacenes/${idUser}`;
    
        return axiosApi.post(_URL, data)
    }
