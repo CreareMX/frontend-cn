@@ -84,7 +84,7 @@ export const getAllTyperPersons = async () =>{
 
    
    export const getAllWarehouseType = async () =>{
-    const _URL = `/api/TiposAlmacen/all`;
+    const _URL = `/api/Almacen/TiposAlmacen/all`;
 
        return axiosApi.get(_URL)
    }
@@ -92,20 +92,20 @@ export const getAllTyperPersons = async () =>{
 
    export const postWarehouseType = async (data, idUser) =>{
     
-    const _URL = `/api/TiposAlmacen/${idUser}`;
+    const _URL = `/api/Almacen/TiposAlmacen/${idUser}`;
    
        return axiosApi.post(_URL, data)
    }
 
    export const EditWarehouseType = async (data, idUser) =>{
-    const _URL = `/api/TiposAlmacen/${idUser}`;
+    const _URL = `/api/Almacen/TiposAlmacen/${idUser}`;
    
        return axiosApi.put(_URL, data)
    }
 
 
    export const deleteWarehouseType = async (data, idUser) =>{
-    const _URL = `api/TiposAlmacen/${idUser}`;
+    const _URL = `api/Almacen/TiposAlmacen/${idUser}`;
 
     console.log(_URL, data)
    
@@ -114,26 +114,26 @@ export const getAllTyperPersons = async () =>{
 
 
    export const getAllWarehouse = async () =>{
-    const _URL = `/api/Almacenes/all`;
+    const _URL = `/api/Almacen/Almacenes/all`;
 
        return axiosApi.get(_URL)
    }
 
    export const postWarehouse = async (data, idUser) =>{
     
-    const _URL = `/api/Almacenes/${idUser}`;
+    const _URL = `/api/api/Almacen/Almacenes/${idUser}`;
    
        return axiosApi.post(_URL, data)
    }
 
    export const EditWarehouse = async (data, idUser) =>{
-    const _URL = `/api/Almacenes/${idUser}`;
+    const _URL = `/api/Almacen/Almacenes/${idUser}`;
    
        return axiosApi.put(_URL, data)
    }
 
    export const deleteWarehouse = async (data, idUser) =>{
-    const _URL = `api/Almacenes/${idUser}`;
+    const _URL = `api/Almacen/Almacenes/${idUser}`;
 
     console.log(_URL, data)
    
@@ -202,6 +202,82 @@ export const getAllTyperPersons = async () =>{
    
        return axiosApi.put(_URL)
    }
+
+   export const getAllProductos = async () =>{
+    
+    const _URL =`/api/Compras/ProveedorProductos/all`;
+   
+       return axiosApi.get(_URL)
+   }
+
+   export const getAlmacenByIdSucursal = async () =>{
+    
+    const _URL =`/api/Almacen/Almacenes/all`;
+   
+       return axiosApi.get(_URL)
+   }
+
+   export const getKardexByIdAlmacen = async (idAlmacen) =>{
+    
+    let date = new Date().toISOString();
+
+    const _URL =`/api/Almacen/Inventarios/kardex/${date}/${idAlmacen}`;
+   
+       return axiosApi.get(_URL)
+   }
+
+   export const kardexBajoStock = async (idAlmacen) =>{
+    
+    let date = new Date().toISOString();
+
+    const _URL =`/api/Almacen/Inventarios/kardex/${date}/${idAlmacen}`;
+   
+       return axiosApi.get(_URL)
+   }
+
+
+   export const getAllDepartures = async () =>{
+    
+    let date = new Date().toISOString();
+
+    const _URL =`/api/Almacen/SalidasAlmacen/all`;
+   
+       return axiosApi.get(_URL)
+   }
+
+   
+   export const getAllTransfers = async () =>{
+
+    let date = new Date().toISOString();
+
+    const _URL =`/api/Almacen/Transferencias/all`;
+   
+       return axiosApi.get(_URL)
+   }
+
+
+   export const postSalidaAlmacen = async (data, idUser) =>{
+    
+    const _URL = `/api/Almacen/SalidasAlmacen/${idUser}`;
+   
+       return axiosApi.post(_URL, data)
+   }
+
+   export const entradaAlmacen = async (data, idUser) =>{
+    
+    const _URL = `/api/Almacen/EntradasAlmacen/${idUser}`;
+   
+       return axiosApi.post(_URL, data)
+   }
+
+   export const trasferenciaAlmacen = async (data, idUser) =>{
+    
+    const _URL = `/api/Almacen/Transferencias/${idUser}`;
+   
+       return axiosApi.post(_URL, data)
+   }
+
+
 
 
 

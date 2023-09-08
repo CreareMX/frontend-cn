@@ -7,6 +7,7 @@ import { useRouter } from 'next/router'
 
 
 // ** MUI Imports
+import Button from '@mui/material/Button'
 import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
 import Menu from '@mui/material/Menu'
@@ -19,7 +20,7 @@ import CardHeader from '@mui/material/CardHeader'
 import InputLabel from '@mui/material/InputLabel'
 import FormControl from '@mui/material/FormControl'
 import CardContent from '@mui/material/CardContent'
-import { DataGrid , esES } from '@mui/x-data-grid'
+import { DataGrid, esES } from '@mui/x-data-grid'
 import Select from '@mui/material/Select'
 import DialogAlert from 'src/views/components/dialogs/DialogAlert'
 
@@ -44,10 +45,10 @@ import { fetchData, deleteUser } from 'src/store/apps/user'
 import axios from 'axios'
 
 // ** Custom Table Components Imports
-import TableHeader from 'src/views/apps/orders-to-receive/TableHeader'
+import TableHeader from 'src/views/apps/inventary/TableHeader'
 import AddUserDrawer from 'src/views/apps/branch-office/AddbranchOfficeDrawer'
 import SidebarEditPeople from 'src/views/apps/branch-office/EditBranchOffice'
-import { getAllRequesitions } from 'src/api/RequestApi'
+import { getAllProductos, changeStatusReqById, getAlmacenByIdSucursal, getKardexByIdAlmacen } from 'src/api/RequestApi'
 import { deleteBranchOffice } from 'src/api/RequestApi'
 import toast from 'react-hot-toast'
 
@@ -59,8 +60,8 @@ const PersonsType = ({ apiData }) => {
   const router = useRouter()
 
   // ** State
-  const [role, setRole] = useState('')
-  const [plan, setPlan] = useState('')
+  const [sucursal, setSucursal] = useState('')
+  const [almacen, setAlmacen] = useState('')
   const [value, setValue] = useState('')
   const [status, setStatus] = useState('')
   const [addUserOpen, setAddUserOpen] = useState(false)
@@ -72,6 +73,9 @@ const PersonsType = ({ apiData }) => {
   const [nombre,setNombre] = useState('')
   const [currentPerson, setCurrentPerson] = useState({})
   const [id,setId] = useState(null)
+  const [sucursales, setSucursales] = useState([])
+  const [currentAlmacen, setCurrentAlmacen] = useState([])
+  const [almacenes,setAlmacenes] = useState([])
 
 
 
@@ -96,8 +100,23 @@ const PersonsType = ({ apiData }) => {
    
   
     const handleEdit = (id) => {
-      router.push('orders-to-receive/[id]', `orders-to-receive/${id}`);
+      router.push('purchase-orders/[id]', `purchase-orders/${id}`);
+
     }
+
+    const rechazarOC = async(id) =>{
+      try {
+       const response = await changeStatusReqById(id,10,1)
+       if(response.status === 200){
+         toast.success('Requisición rechazada correctamente')
+         getRequesitions()
+       }
+       
+    } catch (error) {
+     console.log(error)
+    }
+    }
+    
 
   
     // const getRequesitions =  async() =>{
@@ -145,27 +164,27 @@ const PersonsType = ({ apiData }) => {
             View
           </MenuItem>
           */}
-         
-          <MenuItem onClick={()=>{
-               handleEdit(data.id)
-            }}
-             sx={{ '& svg': { mr: 2 } }}>
-            <Icon icon='mdi:eye-outline' fontSize={20} />
-            Visualizar
-          </MenuItem>
+          {/* <MenuItem onClick={()=>{handleEdit(data.id)}} sx={{ '& svg': { mr: 2 } }}>
+            <Icon icon='tabler:edit' fontSize={20} />
+            Editar
+          </MenuItem>  */}
         </Menu>
       </>
     )
   }
   
   const columns = [
+  
+
     {
       flex: 0.25,
-      minWidth: 280,
-      field: 'fecha',
-      headerName: 'Fecha',
+      minWidth: 450,
+      maxWidth:450,
+      field: 'producto.nombre',
+      headerName: 'Producto',
       renderCell: ({ row }) => {
-
+        let {producto} = row
+  
         return (
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
             <Box sx={{ display: 'flex', alignItems: 'center', justifyContent:'center', flexDirection: 'column' }}>
@@ -178,7 +197,7 @@ const PersonsType = ({ apiData }) => {
                   '&:hover': { color: 'primary.main' }
                 }}
               >
-                {new Date(row.fecha).toLocaleDateString('es-MX')}
+                {producto?.nombre}
               </Typography>
             </Box>
           </Box>
@@ -187,111 +206,8 @@ const PersonsType = ({ apiData }) => {
     },
     {
       flex: 0.25,
-      minWidth: 280,
-      field: 'proveedor',
-      headerName: 'Proveedor',
-      renderCell: ({ row }) => {
-        const { cliente } = row
-  
-        return (
-          <Box sx={{ display: 'flex', alignItems: 'center' }}>
-            <Box sx={{ display: 'flex', alignItems: 'flex-start', flexDirection: 'column' }}>
-              <Typography
-                noWrap
-                sx={{
-                  fontWeight: 500,
-                  textDecoration: 'none',
-                  color: 'text.secondary',
-                  '&:hover': { color: 'primary.main' }
-                }}
-              >
-                {cliente.nombre}
-              </Typography>
-            </Box>
-          </Box>
-        )
-      }
-    },
-  
-    // {
-    //   flex: 0.15,
-    //   field: 'role',
-    //   minWidth: 170,
-    //   headerName: 'Rol',
-    //   renderCell: ({ row }) => {
-    //     return (
-    //       <Box sx={{ display: 'flex', alignItems: 'center' }}>
-    //         <CustomAvatar
-    //           skin='light'
-    //           sx={{ mr: 4, width: 30, height: 30 }}
-    //           color={userRoleObj[row.role].color || 'primary'}
-    //         >
-    //           <Icon icon={userRoleObj[row.role].icon} />
-    //         </CustomAvatar>
-    //         <Typography noWrap sx={{ color: 'text.secondary', textTransform: 'capitalize' }}>
-    //           {row.role}
-    //         </Typography>
-    //       </Box>
-    //     )
-    //   }
-    // },
-  
-    // {
-    //   flex: 0.15,
-    //   minWidth: 120,
-    //   headerName: 'Plan',
-    //   field: 'currentPlan',
-    //   renderCell: ({ row }) => {
-    //     return (
-    //       <Typography noWrap sx={{ fontWeight: 500, color: 'text.secondary', textTransform: 'capitalize' }}>
-    //         {row.currentPlan}
-    //       </Typography>
-    //     )
-    //   }
-    // },
-    // {
-    //   flex: 0.15,
-    //   minWidth: 190,
-    //   field: 'billing',
-    //   headerName: 'Pago',
-    //   renderCell: ({ row }) => {
-    //     return (
-    //       <Typography noWrap sx={{ color: 'text.secondary' }}>
-    //         {row.billing}
-    //       </Typography>
-    //     )
-    //   }
-    // },
-    // {
-    //   flex: 0.25,
-    //   minWidth: 280,
-    //   field: 'comentarios',
-    //   headerName: 'Comentarios',
-    //   renderCell: ({ row }) => {
-  
-    //     return (
-    //       <Box sx={{ display: 'flex', alignItems: 'center' }}>
-    //         <Box sx={{ display: 'flex', alignItems: 'center', justifyContent:'center', flexDirection: 'column' }}>
-    //           <Typography
-    //             noWrap
-    //             sx={{
-    //               fontWeight: 500,
-    //               textDecoration: 'none',
-    //               color: 'text.secondary',
-    //               '&:hover': { color: 'primary.main' }
-    //             }}
-    //           >
-    //             {row.comentarios}
-    //           </Typography>
-    //         </Box>
-    //       </Box>
-    //     )
-    //   }
-    // },
-    {
-      flex: 0.25,
-      minWidth: 280,
-      field: 'alamcen',
+      minWidth: 300,
+      field: 'almacen',
       headerName: 'Almacen',
       renderCell: ({ row }) => {
   
@@ -307,23 +223,23 @@ const PersonsType = ({ apiData }) => {
                   '&:hover': { color: 'primary.main' }
                 }}
               >
-                {row.almacen.nombre}
+                {currentAlmacen.nombre}
               </Typography>
             </Box>
           </Box>
         )
       }
     },
+
     {
       flex: 0.25,
-      minWidth: 280,
-      field: 'sucursal',
-      headerName: 'Sucursal',
-      renderCell: ({ row }) => {
-  
+      minWidth: 200,
+      field: 'existencia',
+      headerName: 'Existencias',
+      renderCell: ({ row }) => {  
         return (
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
-            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent:'center', flexDirection: 'column' }}>
+            <Box sx={{ display: 'flex', alignItems: 'flex-start', flexDirection: 'column' }}>
               <Typography
                 noWrap
                 sx={{
@@ -333,61 +249,28 @@ const PersonsType = ({ apiData }) => {
                   '&:hover': { color: 'primary.main' }
                 }}
               >
-                {row.sucursal.nombre}
+                {row.existencia}
               </Typography>
             </Box>
           </Box>
         )
       }
     },
-    {
-      flex: 0.25,
-      minWidth: 280,
-      field: 'estado',
-      headerName: 'Estado',
-      renderCell: ({ row }) => {
-  
-        return (
-          <Box sx={{ display: 'flex', alignItems: 'center' }}>
-            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent:'center', flexDirection: 'column' }}>
-              <CustomChip
-          rounded
-          skin='light'
-          size='small'
-          label={row.estado.nombre === 'OC_PAGADA' ? 'PENDIENTE': ''}
-          color={row.estado.nombre === 'OC_PAGADA' ? 'info' : ''}
-          sx={{ textTransform: 'capitalize' }}
-        />
-            </Box>
-          </Box>
-        )
-      }
-    },
-  
-    {
-      flex: 0.1,
-      minWidth: 200,
-      sortable: false,
-      field: 'actions',
-      headerName: 'Acciones',
-      renderCell: ({ row }) => <RowOptions data={row} id={row.id} />
-    }
+    
+    // {
+    //   flex: 0.1,
+    //   minWidth: 200,
+    //   sortable: false,
+    //   field: 'actions',
+    //   headerName: 'Acciones',
+    //   renderCell: ({ row }) => <RowOptions data={row} id={row.id} />
+    // }
   ]
 
 
   // ** Hooks
   const dispatch = useDispatch()
   const store = useSelector(state => state.user)
-  useEffect(() => {
-    dispatch(
-      fetchData({
-        role,
-        status,
-        q: value,
-        currentPlan: plan
-      })
-    )
-  }, [dispatch, plan, role, status, value])
 
   const handleFilter = useCallback(val => {
     setValue(val)
@@ -396,23 +279,73 @@ const PersonsType = ({ apiData }) => {
   
 
 
-  const getRequesitions =  async() =>{
+  const getAlmacenBySucursal =async(idSucursal)=>{
     try {
       setLoading(true)
-        const response = await getAllRequesitions()
-        if(response.status === 200){
-          console.log(response.data)
-          let purchaseOrders = response.data.filter(e => e.estado.nombre === 'OC_PAGADA')
-          purchaseOrders.reverse()
-          setTypePersons(purchaseOrders)
+      console.log(sucursal)
+        const response = await getAlmacenByIdSucursal()
+        if(response.status === 200){   
+               
+          const almacenes = response.data.filter(e=> e.sucursal.id == idSucursal)
+          setSucursales(almacenes)
+          
           setLoading(false)
-
         }
         
     } catch (error) {
       console.log(error)
     }
+    
   }
+
+  const getKardexAlamcen =async()=>{
+    try {
+      setLoading(true)
+        const response = await getKardexByIdAlmacen(almacen)
+        if(response.status === 200){          
+        console.log(response.data)
+        setCurrentAlmacen(response.data.almacen)
+        setTypePersons(response.data.detalles)
+        }
+        setLoading(false)
+
+        
+    } catch (error) {
+      console.log(error)
+
+      setTypePersons([])
+
+      setLoading(false)
+
+    }
+    
+  }
+
+  const validarOC = async(id) =>{
+    try {
+     const response = await changeStatusReqById(id,8,1)
+     if(response.status === 200){
+       toast.success('Orden de compra validada correctamente')
+       getRequesitions()
+     }
+     
+ } catch (error) {
+   console.log(error)
+ }
+}
+
+const cancelarOC = async(id) =>{
+ try {
+  const response = await changeStatusReqById(id,9,1)
+  if(response.status === 200){
+    toast.success('Orden de compra cancelada correctamente')
+    getRequesitions()
+  }
+  
+} catch (error) {
+console.log(error)
+}
+}
   
   const handleDelete = async() => {
   
@@ -435,18 +368,27 @@ const PersonsType = ({ apiData }) => {
   }
 
   useEffect(() => {
-    getRequesitions()
   },[]);
 
   const toggleAddUserDrawer = () => setAddUserOpen(!addUserOpen)
   const toggleEditUserDrawer = () => setEditUserOpen(!editUserOpen)
 
   const sucessSubmit = () =>{
-    getRequesitions()
+    getProducts()
   }
 
   const closeModal = () =>{
       setOpenModal(false)
+  }
+
+  const handleChangeSucursal =(sucursal)=>{
+    setTypePersons([])
+    getAlmacenBySucursal(sucursal.target.value)
+    setSucursal(sucursal.target.value)
+  }
+
+  const handleAlmacen =(almacen)=>{
+    setAlmacen(almacen.target.value)
   }
 
   return (
@@ -466,71 +408,57 @@ const PersonsType = ({ apiData }) => {
       </Grid> */}
       <Grid item xs={12}>
         <Card>
-          {/* <CardHeader title='Search Filters' />
+          <CardHeader title='Filtros' />
           <CardContent>
             <Grid container spacing={6}>
               <Grid item sm={4} xs={12}>
                 <FormControl fullWidth>
-                  <InputLabel id='role-select'>Select Role</InputLabel>
+                  <InputLabel id='role-select'>Selecciona un sucursal</InputLabel>
                   <Select
                     fullWidth
-                    value={role}
+                    value={sucursal}
+                    onChange={handleChangeSucursal}
                     id='select-role'
-                    label='Select Role'
+                    label='Selecciona un sucursal'
                     labelId='role-select'
-                    onChange={handleRoleChange}
-                    inputProps={{ placeholder: 'Select Role' }}
+                    inputProps={{ placeholder: 'Selecciona un sucursal' }}
                   >
-                    <MenuItem value=''>Select Role</MenuItem>
-                    <MenuItem value='admin'>Admin</MenuItem>
-                    <MenuItem value='author'>Author</MenuItem>
-                    <MenuItem value='editor'>Editor</MenuItem>
-                    <MenuItem value='maintainer'>Maintainer</MenuItem>
-                    <MenuItem value='subscriber'>Subscriber</MenuItem>
+                    <MenuItem value='1'>Merida</MenuItem>
+                    <MenuItem value='2'>Valladolid</MenuItem>
                   </Select>
                 </FormControl>
               </Grid>
               <Grid item sm={4} xs={12}>
                 <FormControl fullWidth>
-                  <InputLabel id='plan-select'>Select Plan</InputLabel>
+                  <InputLabel id='plan-select'>Selecciona un almacen</InputLabel>
                   <Select
                     fullWidth
-                    value={plan}
+                    value={almacen}
+                    onChange={handleAlmacen}
                     id='select-plan'
-                    label='Select Plan'
+                    disabled={sucursales.length==0 }
+                    label='Selecciona un almacen'
                     labelId='plan-select'
-                    onChange={handlePlanChange}
-                    inputProps={{ placeholder: 'Select Plan' }}
+                    inputProps={{ placeholder: 'Selecciona un almacen' }}
                   >
-                    <MenuItem value=''>Select Plan</MenuItem>
-                    <MenuItem value='basic'>Basic</MenuItem>
-                    <MenuItem value='company'>Company</MenuItem>
-                    <MenuItem value='enterprise'>Enterprise</MenuItem>
-                    <MenuItem value='team'>Team</MenuItem>
+                   {
+                      sucursales.map((item) => {
+                        return (
+                          <MenuItem key={item.id} value={item.id}>{item.nombre}</MenuItem>
+                        )
+                      })
+                    }
                   </Select>
                 </FormControl>
               </Grid>
-              <Grid item sm={4} xs={12}>
-                <FormControl fullWidth>
-                  <InputLabel id='status-select'>Select Status</InputLabel>
-                  <Select
-                    fullWidth
-                    value={status}
-                    id='select-status'
-                    label='Select Status'
-                    labelId='status-select'
-                    onChange={handleStatusChange}
-                    inputProps={{ placeholder: 'Select Role' }}
-                  >
-                    <MenuItem value=''>Select Role</MenuItem>
-                    <MenuItem value='pending'>Pending</MenuItem>
-                    <MenuItem value='active'>Active</MenuItem>
-                    <MenuItem value='inactive'>Inactive</MenuItem>
-                  </Select>
-                </FormControl>
+              <Grid item sm={4} xs={12}  display="flex"
+  alignItems="center" >
+              <Button disabled={almacen== ''} onClick={() => getKardexAlamcen()} size='large' variant='outlined'>
+            Filtrar
+          </Button>
               </Grid>
             </Grid>
-          </CardContent> */}
+          </CardContent>
           <Divider sx={{ m: '0 !important' }} />
           <TableHeader value={value} handleFilter={handleFilter} toggle={toggleAddUserDrawer} />
           <DataGrid
@@ -538,6 +466,7 @@ const PersonsType = ({ apiData }) => {
             rowHeight={62}
             rows={typePersons}
             columns={columns}
+            getRowId={(row) =>  row.producto.id}
             localeText={esES.components.MuiDataGrid.defaultProps.localeText}  
             disableRowSelectionOnClick
             loading={loading}

@@ -25,6 +25,7 @@ const navigation = () => {
           title: 'Proveedores',
           path: '/providers'
         },
+   
 
         // {
         //   title: 'Proveedores',
@@ -63,8 +64,75 @@ const navigation = () => {
       icon: 'ph:package-light',
       children: [
         {
-          title: 'OC por recibir',
+          title: 'Entradas',
           path: '/orders-to-receive'
+        },
+        {
+          title: 'Inventario',
+          path: '/inventary'
+        },
+
+        {
+          title: 'Traspasos',
+          path: '/transfers'
+        },
+        {
+          title: 'Salidas',
+          path: '/departures'
+        },
+        {
+          title: 'Ajustes',
+          path: '/adjustments'
+        },
+      ]
+    },
+    {
+      title: 'Egresos',
+      icon: 'iconoir:log-in',
+      children: [
+        {
+          title: 'Programación pagos',
+          path: '/payment-schedule'
+        },
+      ]
+    },
+    {
+      title: 'Ingresos',
+      icon: 'gridicons:add',
+      children: [
+        {
+          title: 'Por cobrar',
+          path: '/receivable'
+        },
+        {
+          title: 'Corte de caja',
+          path: '/cash-register'
+        },
+        {
+          title: 'Caja chica',
+          path: '/petty-cash'
+        },
+      ]
+    },
+    {
+      title: 'Ventas',
+      icon: 'mi:log-out',
+      children: [
+        {
+          title: 'Punto de venta',
+          path: '/point-of-sale'
+        },
+        {
+          title: 'Cotizaciones',
+          path: '/quotes'
+        },
+        {
+          title: 'Pedidos',
+          path: '/orders'
+        },
+        {
+          title: 'Asignación de pedidos',
+          path: '/order-assignment'
         },
       ]
     },

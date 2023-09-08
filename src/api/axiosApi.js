@@ -8,6 +8,7 @@ const config = {
     baseURL: baseUrl,
     headers: {
       'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin' : '*'
     },
       
 };
