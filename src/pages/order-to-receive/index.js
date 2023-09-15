@@ -96,7 +96,7 @@ const PersonsType = ({ apiData }) => {
    
   
     const handleEdit = (id) => {
-      router.push('orders-to-receive/[id]', `orders-to-receive/${id}`);
+      router.push('order-to-receive/[id]', `order-to-receive/${id}`);
     }
 
   

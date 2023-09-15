@@ -65,7 +65,7 @@ const navigation = () => {
       children: [
         {
           title: 'Entradas',
-          path: '/orders-to-receive'
+          path: '/order-to-receive'
         },
         {
           title: 'Inventario',

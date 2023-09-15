@@ -355,20 +355,19 @@ const FormLayoutsSeparator = () => {
         cantidad: parseInt(element.cantidad),
         fechaSalida:date,
         idAlmacen: warehouseSelected.id,
-        idUnidad: 3,
-        idEstado:12,
-        idConcepto: 4,
+        idUnidad: 6,
+        idEstado:21,
+        idConcepto: 10,
       }
-      console.log("🚀 ~ file: form.js:418 ~ productList.forEach ~ dataSalida:", dataSalida)
 
       let dataEntrada = {
         idProducto: element.id,
         cantidad: parseInt(element.cantidad),
         FechaEntrada:date,
         idAlmacen: warehouseSelectedDestination.id,
-        idUnidad: 3,
-        idEstado:12,
-        idConcepto: 2,
+        idUnidad: 6,
+        idEstado:21,
+        idConcepto: 11,
       }
 
       
@@ -378,15 +377,12 @@ const FormLayoutsSeparator = () => {
       
       if(response.status === 200){
 
-        console.log("🚀 ~ file: form.js:382 ~ productList.forEach ~ response.data:", response.data)
 
          idAlmacenSalida = response.data.id
 
         const responseSalida= await entradaAlmacen(dataEntrada, 1)
 
         if(responseSalida.status == 200){
-        console.log("🚀 ~ file: form.js:386 ~ productList.forEach ~ responseSalida:", responseSalida.data)
-
           
 
           idAlmacenEntrada = responseSalida.data.id

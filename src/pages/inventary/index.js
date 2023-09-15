@@ -424,7 +424,7 @@ console.log(error)
                     inputProps={{ placeholder: 'Selecciona un sucursal' }}
                   >
                     <MenuItem value='1'>Merida</MenuItem>
-                    <MenuItem value='2'>Valladolid</MenuItem>
+                    <MenuItem value='8'>Valladolid</MenuItem>
                   </Select>
                 </FormControl>
               </Grid>

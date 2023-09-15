@@ -319,9 +319,9 @@ const FormLayoutsSeparator = () => {
         cantidad: parseInt(element.cantidad),
         fechaSalida:date,
         idAlmacen: warehouseSelected.id,
-        idUnidad: 3,
-        idEstado:12,
-        idConcepto: 4,
+        idUnidad: 6,
+        idEstado:21,
+        idConcepto: 10,
       }
       
        try {

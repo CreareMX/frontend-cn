@@ -76,7 +76,7 @@ const CustomInput = forwardRef((props, ref) => {
   return <TextField fullWidth {...props} inputRef={ref} label='Fecha' autoComplete='off' />
 })
 
-const FormLayoutsSeparator = () => {
+const FormLayoutsSeparator1 = () => {
   const router = useRouter()
 
   // ** States
@@ -401,7 +401,6 @@ const FormLayoutsSeparator = () => {
 
     try {
       const response = await updateRequesitions(dataReq, 1)
-      console.log("🚀 ~ file: form.js:355 ~ onSubmit ~ response:", response)
       
       if(response.status === 200){
 
@@ -485,7 +484,7 @@ const FormLayoutsSeparator = () => {
   return (
     <>
     <Card>
-      <CardHeader title='Editar Requsision' />
+      <CardHeader title='Visualizar Requsision' />
       <Divider sx={{ m: '0 !important' }} />
       <form onSubmit={handleSubmit(onSubmit)}>
         <CardContent>
@@ -582,7 +581,7 @@ const FormLayoutsSeparator = () => {
         <Divider sx={{ m: '0 !important' }} />
         <CardActions style={{display:'flex', justifyContent:'flex-end'}}>
           <Button size='large' onClick={()=>{
-            router.push('/orders-to-receive')
+            router.push('/order-to-receive')
           }} sx={{ mr: 2 }} variant='contained'>
             Regresar
           </Button>
@@ -594,4 +593,4 @@ const FormLayoutsSeparator = () => {
   
 }
 
-export default FormLayoutsSeparator
+export default FormLayoutsSeparator1

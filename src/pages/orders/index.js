@@ -54,7 +54,7 @@ import toast from 'react-hot-toast'
 
 
 
-const PersonsType = ({ apiData }) => {
+const Orders = ({ apiData }) => {
 
   const router = useRouter()
 
@@ -598,4 +598,4 @@ export const getStaticProps = async () => {
   }
 }
 
-export default PersonsType
+export default Orders

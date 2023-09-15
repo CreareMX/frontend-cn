@@ -111,17 +111,17 @@ const FormLayoutsSeparator = () => {
   const productos =[
     {
       id:1,
-      nombreProd:'BATIDORA ARTISAN AGUAMA 4.7Lt KSM150PSAQ',
-      proveedor: 'ADRIAN AGUILERA MORENO',
-      almacen: 'Valladolid',
+      nombreProd:'ROLLO CABLE ETHERNET CAT 5 100MTS PANDUIT',
+      proveedor: 'PROVEEDOR DE PRUEBA',
+      almacen: 'Mérida',
       cantidadContada: 102,
       CantidadSistem:  100
     },
     {
       id:2,
-      nombreProd:'AZUCAR ESTANDAR SACO 25KG',
-      proveedor: 'ADRIAN AGUILERA MORENO',
-      almacen: 'Valladolid',
+      nombreProd:'CAMARA HIKVISION HD0001',
+      proveedor: 'PROVEEDOR DE PRUEBA',
+      almacen: 'Mérida',
       cantidadContada: 55,
       CantidadSistem:  57
     },

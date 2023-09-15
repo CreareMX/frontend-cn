@@ -433,7 +433,7 @@ const FormLayoutsSeparator = () => {
       idProveedor:data?.idProveedor,
       proveedor:data?.proveedor?.nombre
     }
-    const found = productList.some(el => el.id === data.id);
+    const found = productList.some(el => el.id == data.producto.id);
 
     if(found){
       setCount('')
