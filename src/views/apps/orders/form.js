@@ -417,7 +417,7 @@ const FormLayoutsSeparator = () => {
       localStorage.setItem('puntoVenta',JSON.stringify(addTojson) )
     }
   
-    toast.success('Cotización realizada con éxito')
+    toast.success('Servicio realizado con éxito')
     router.push('/services')
 
   }
