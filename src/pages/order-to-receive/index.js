@@ -99,6 +99,17 @@ const PersonsType = ({ apiData }) => {
       router.push('order-to-receive/[id]', `order-to-receive/${id}`);
     }
 
+    const entrada = (id) => {
+
+      const objWithIdIndex = typePersons.findIndex((obj) => obj.id === id);
+      const newArry = [...typePersons]
+      newArry.splice(objWithIdIndex, 1);
+      toast.success('Entrada de almacén con éxito')
+
+      JSON.stringify(localStorage.setItem('entradas', JSON.stringify(newArry) ))
+      setTypePersons(newArry)     
+    }
+
   
     // const getRequesitions =  async() =>{
     //   try {
@@ -153,6 +164,13 @@ const PersonsType = ({ apiData }) => {
             <Icon icon='mdi:eye-outline' fontSize={20} />
             Visualizar
           </MenuItem>
+          <MenuItem onClick={()=>{
+               entrada(data.id)
+            }}
+             sx={{ '& svg': { mr: 2 } }}>
+            <Icon icon='material-symbols:check' fontSize={20} />
+            Entrada
+          </MenuItem>
         </Menu>
       </>
     )
@@ -161,7 +179,8 @@ const PersonsType = ({ apiData }) => {
   const columns = [
     {
       flex: 0.25,
-      minWidth: 280,
+      minWidth: 150,
+      maxWidth:150,
       field: 'fecha',
       headerName: 'Fecha',
       renderCell: ({ row }) => {
@@ -290,7 +309,8 @@ const PersonsType = ({ apiData }) => {
     // },
     {
       flex: 0.25,
-      minWidth: 280,
+      minWidth: 150,
+      maxWidth:150,
       field: 'alamcen',
       headerName: 'Almacen',
       renderCell: ({ row }) => {
@@ -307,7 +327,7 @@ const PersonsType = ({ apiData }) => {
                   '&:hover': { color: 'primary.main' }
                 }}
               >
-                {row.almacen.nombre}
+                {row.idAlmacen == 3 ? 'Almacen general' : 'Mostrador'}
               </Typography>
             </Box>
           </Box>
@@ -316,7 +336,8 @@ const PersonsType = ({ apiData }) => {
     },
     {
       flex: 0.25,
-      minWidth: 280,
+      minWidth: 150,
+      maxWidth:150,
       field: 'sucursal',
       headerName: 'Sucursal',
       renderCell: ({ row }) => {
@@ -333,7 +354,7 @@ const PersonsType = ({ apiData }) => {
                   '&:hover': { color: 'primary.main' }
                 }}
               >
-                {row.sucursal.nombre}
+                {row.sucursal.id == 1 ? 'Héroes' : 'Polígono'}
               </Typography>
             </Box>
           </Box>
@@ -354,8 +375,8 @@ const PersonsType = ({ apiData }) => {
           rounded
           skin='light'
           size='small'
-          label={row.estado.nombre === 'OC_PAGADA' ? 'PENDIENTE': ''}
-          color={row.estado.nombre === 'OC_PAGADA' ? 'info' : ''}
+          label={'Pendiente'}
+          color={row?.estado?.nombre == 'OC_PAGADA' ? 'info' : 'warning'}
           sx={{ textTransform: 'capitalize' }}
         />
             </Box>
@@ -396,53 +417,26 @@ const PersonsType = ({ apiData }) => {
   
 
 
-  const getRequesitions =  async() =>{
-    try {
-      setLoading(true)
-        const response = await getAllRequesitions()
-        if(response.status === 200){
-          console.log(response.data)
-          let purchaseOrders = response.data.filter(e => e.estado.nombre === 'OC_PAGADA')
-          purchaseOrders.reverse()
-          setTypePersons(purchaseOrders)
-          setLoading(false)
 
-        }
-        
-    } catch (error) {
-      console.log(error)
-    }
-  }
+   const llenarLista = ()=>{
+    let listaFiltrada = JSON.parse(localStorage.getItem('entradas')) || []
+    console.log("🚀 ~ file: index.js:402 ~ llenarLista ~ listaFiltrada:", listaFiltrada)
+    setTypePersons(listaFiltrada)
+   }
   
   const handleDelete = async() => {
   
-    setOpenModal(false)
-    try {
-      let data = {id}
-      
-      const response = await deleteBranchOffice(data, 1)
-
-      if(response.status == 200){
-       await getRequesitions()
-        toast.success('Sucursal eliminada con éxito')
-
-      }
-      
-    } catch (error) {
-      console.log(error)
-    }
 
   }
 
   useEffect(() => {
-    getRequesitions()
+    llenarLista()
   },[]);
 
   const toggleAddUserDrawer = () => setAddUserOpen(!addUserOpen)
   const toggleEditUserDrawer = () => setEditUserOpen(!editUserOpen)
 
   const sucessSubmit = () =>{
-    getRequesitions()
   }
 
   const closeModal = () =>{

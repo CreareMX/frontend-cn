@@ -49,14 +49,19 @@ const DialogAlert = ({open = false, handleClose, onConfirm, title = '', content=
 
   return (   
     <Dialog
-    maxWidth={'xl'}
         open={open}
         onClose={handleClose}
+        overflow='hidden'
         aria-describedby='alert-dialog-description'
+        PaperProps={{
+          sx: {
+            height: 580
+          }
+        }}
       >
         <DialogTitle id='alert-dialog-title'>{title}</DialogTitle>
         <DialogContent>
-        <DialogContentText sx={{ mb: 4, width:380 }} >
+        <DialogContentText sx={{ mb: 4 }} >
             Selecciona a un responsable para la orden              
           </DialogContentText>
         <Grid item xs={12} sm={12} sx={{mb:4}}>

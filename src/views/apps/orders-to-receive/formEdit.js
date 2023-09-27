@@ -104,6 +104,128 @@ const FormLayoutsSeparator1 = () => {
     showPassword2: false
   })
 
+
+  const entradas = [
+    {
+      "id":1,
+      "almacen": {
+        "id": 1,
+        "descripcion": "Almacen Principal",
+        "nombre": "Mostrador",
+        "codigo": "C1245S",
+        "idTipoAlmacen": 1,
+        "tipoAlmacen": null,
+        "idSucursal": 1,
+        "sucursal": {
+          "nombre": "Héroes",
+          "id": 1,
+          "domicilio": "C45 #234 Col Centro",
+          "telefono": "9992353664"
+        }
+      },
+      "sucursal": {
+        "nombre": "Héroes",
+        "id": 1,
+        "domicilio": "C45 #234 Col Centro",
+        "telefono": "9992353664"
+      },
+      "comentario": "Comentario de prueba",
+      "productos" : [
+        {"id":1, "nombre": 'PLUG RJ-45 CAT5 INTELLINET', "descripcion": "PLUG RJ-45 CAT5 INTELLINET", "cantidad":4},
+        {"id":2, "nombre": 'CAMARA HIKVISION HD0001', "descripcion": "CAMARA HIKVISION HD0001", "cantidad":1} ,
+        {"id":3, "nombre": 'ROLLO CABLE ETHERNET VORAGO CAT 5 100 MTS', "descripcion": "ROLLO CABLE ETHERNET VORAGO CAT 5 100 MTS", "cantidad":2} 
+
+      ]
+    },
+    {
+      "id":2,
+      "almacen": {
+        "id": 1,
+        "descripcion": "Almacen Principal",
+        "nombre": "Mostrador",
+        "codigo": "C1245S",
+        "idTipoAlmacen": 1,
+        "tipoAlmacen": null,
+        "idSucursal": 1,
+        "sucursal": {
+          "nombre": "Héroes",
+          "id": 1,
+          "domicilio": "C45 #234 Col Centro",
+          "telefono": "9992353664"
+        }
+      },
+      "sucursal": {
+        "nombre": "Héroes",
+        "id": 1,
+        "domicilio": "C45 #234 Col Centro",
+        "telefono": "9992353664"
+      },
+      "comentario": "Comentario de prueba",
+      "productos" : [
+        {"id":1, "nombre": 'TP-LINK TAPO C310', "descripcion": "TP-LINK TAPO C310", "cantidad":1}, 
+        {"id":2, "nombre": 'ROLLO CABLE ETHERNET CAT 5 100MTS PANDUIT', "descripcion": "ROLLO CABLE ETHERNET CAT 5 100MTS PANDUIT", "cantidad":2} 
+      ]
+    }, 
+    {
+      "id":3,
+      "almacen": {
+        "id": 1,
+        "descripcion": "Almacen Principal",
+        "nombre": "Mostrador",
+        "codigo": "C1245S",
+        "idTipoAlmacen": 1,
+        "tipoAlmacen": null,
+        "idSucursal": 1,
+        "sucursal": {
+          "nombre": "Héroes",
+          "id": 1,
+          "domicilio": "C45 #234 Col Centro",
+          "telefono": "9992353664"
+        }
+      },
+      "sucursal": {
+        "nombre": "Héroes",
+        "id": 1,
+        "domicilio": "C45 #234 Col Centro",
+        "telefono": "9992353664"
+      },
+      "comentario": "Comentario de prueba",
+      "productos" : [
+        {"id":1, "nombre": 'TP-LINK TAPO C310', "descripcion": "TP-LINK TAPO C310", "cantidad":3} 
+      ]
+    }, 
+    {
+      "id":4,
+      "almacen": {
+        "id": 1,
+        "descripcion": "Almacen Principal",
+        "nombre": "Mostrador",
+        "codigo": "C1245S",
+        "idTipoAlmacen": 1,
+        "tipoAlmacen": null,
+        "idSucursal": 1,
+        "sucursal": {
+          "nombre": "Héroes",
+          "id": 1,
+          "domicilio": "C45 #234 Col Centro",
+          "telefono": "9992353664"
+        }
+      },
+      "sucursal": {
+        "nombre": "Héroes",
+        "id": 1,
+        "domicilio": "C45 #234 Col Centro",
+        "telefono": "9992353664"
+      },
+      "comentario": "Comentario de prueba",
+      "productos" : [
+        {"id":1, "nombre": 'ROLLO CABLE ETHERNET CAT 5 100MTS PANDUIT', "descripcion": "ROLLO CABLE ETHERNET CAT 5 100MTS PANDUIT", "cantidad":3},
+        {"id":2, "nombre": 'CAMARA HIKVISION HD0001', "descripcion": "CAMARA HIKVISION HD0001", "cantidad":1}  
+      ]
+    }, 
+
+  ]
+
   const getPeople =  async() =>{
     try {
       setLoading(true)
@@ -172,34 +294,43 @@ const FormLayoutsSeparator1 = () => {
     }
   }
 
-  const getRequisition = async() =>{
-    try {
-        setLoading(true)
-          const response = await getRequesitionById(id)
-          if(response.status === 200){
-            setLoading(false)
-            setProviderSelectd(response.data.cliente)
-            setBranchOfficeSelected(response.data.sucursal)
-            setWarehouseSelected(response.data.almacen)
-            setComments(response.data.comentarios)
-          }
+  const getRequisition = async(id) =>{
+    // try {
+    //     setLoading(true)
+    //       const response = await getRequesitionById(id)
+    //       if(response.status === 200){
+    //         setLoading(false)
+    //         setProviderSelectd(response.data.cliente)
+    //         setBranchOfficeSelected(response.data.sucursal)
+    //         setWarehouseSelected(response.data.almacen)
+    //         setComments(response.data.comentarios)
+    //       }
           
-      } catch (error) {
-        console.log(error)
-      }    
-    
+    //   } catch (error) {
+    //     console.log(error)
+    //   }    
+
+    let data = entradas.find(e => e.id == id)
+     setComments(data?.comentario)
+     setBranchOfficeSelected(data?.sucursal)
+     setProductList(data?.productos || [])
+     setWarehouseSelected(data?.almacen)
+
 }
 
 
 
 
+
+
   useEffect(()=>{
-    getPeople()
-    getWarehouse()
-    getRequisition()
-    getbranchOffices()    
-    getAllOrderDetail()
-    getProductsbyProvider()
+    // getPeople()
+    // getWarehouse()
+    getRequisition(router.query.id)
+
+    // getbranchOffices()    
+    // getAllOrderDetail()
+    // getProductsbyProvider()
   },[router.query.id])
 
   const RowOptions = ({ id, data }) => {
@@ -484,7 +615,7 @@ const FormLayoutsSeparator1 = () => {
   return (
     <>
     <Card>
-      <CardHeader title='Visualizar Requsision' />
+      <CardHeader title='Visualizar entrada' />
       <Divider sx={{ m: '0 !important' }} />
       <form onSubmit={handleSubmit(onSubmit)}>
         <CardContent>
@@ -505,7 +636,7 @@ const FormLayoutsSeparator1 = () => {
             <Grid item xs={12} sm={6}>
             <Autocomplete
             required
-            value={branchOfficeSelected || ''}
+            value={branchOfficeSelected}
             onChange={(e, data) =>setBranchOfficeSelected(data)}
                 options={branchOffice}
                 id='autocomplete-outlined'

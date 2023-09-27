@@ -423,8 +423,8 @@ console.log(error)
                     labelId='role-select'
                     inputProps={{ placeholder: 'Selecciona un sucursal' }}
                   >
-                    <MenuItem value='1'>Merida</MenuItem>
-                    <MenuItem value='8'>Valladolid</MenuItem>
+                    <MenuItem value='1'>Héroes</MenuItem>
+                    <MenuItem value='8'>Polígono</MenuItem>
                   </Select>
                 </FormControl>
               </Grid>

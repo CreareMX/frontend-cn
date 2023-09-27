@@ -278,7 +278,7 @@ const PersonsType = ({ apiData }) => {
                   '&:hover': { color: 'primary.main' }
                 }}
               >
-                                {row?.salidaAlmacen?.almacen?.nombre}
+                   {row?.salidaAlmacen?.idAlmacen == 6 ? 'Mostrador' : 'Almacén General'}
               </Typography>
             </Box>
           </Box>
@@ -304,7 +304,33 @@ const PersonsType = ({ apiData }) => {
                   '&:hover': { color: 'primary.main' }
                 }}
               >
-                                {row?.entradaAlmacen?.almacen?.nombre}
+                   {row?.salidaAlmacen?.idAlmacen == 1 ? 'Mostrador' : 'Almacén General'}
+              </Typography>
+            </Box>
+          </Box>
+        )
+      }
+    },
+    {
+      flex: 0.25,
+      minWidth: 200,
+      field: 'cantidad',
+      headerName: 'Cantidad',
+      renderCell: ({ row }) => {
+  
+        return (
+          <Box sx={{ display: 'flex', alignItems: 'center' }}>
+            <Box sx={{ display: 'flex', alignItems: 'flex-start', flexDirection: 'column' }}>
+              <Typography
+                noWrap
+                sx={{
+                  fontWeight: 500,
+                  textDecoration: 'none',
+                  color: 'text.secondary',
+                  '&:hover': { color: 'primary.main' }
+                }}
+              >
+                   {row?.entradaAlmacen.cantidad}
               </Typography>
             </Box>
           </Box>

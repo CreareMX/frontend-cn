@@ -88,6 +88,7 @@ const FormLayoutsSeparator = () => {
   const [warehouse, setWarehouse] = useState([])
   const [warehouseDestination, setWarehouseDestination] = useState([])
   const [branchOffice, setBranhOffice] = useState([])
+  const [branchOfficeDestiation, setBranhOfficeDestination] = useState([])
   const [products,setProducts] = useState([])
   const [providerSelected, setProviderSelectd] = useState(null)
   const [warehouseSelected, setWarehouseSelected] = useState(null)
@@ -126,7 +127,6 @@ const FormLayoutsSeparator = () => {
   }
 
   const getWarehouse =  async(idSucursal) =>{
-    console.log("🚀 ~ file: form.js:126 ~ getWarehouse ~ idSucursal:", idSucursal)
 
     try {
       setLoading(true)
@@ -496,6 +496,7 @@ const FormLayoutsSeparator = () => {
   }
 
 
+
   const defaultValues = {
     cometnarios: '',
 
@@ -509,6 +510,11 @@ const FormLayoutsSeparator = () => {
     mode: 'onChange',
   })
 
+  
+  const filterWarehouse = (id) =>{
+    let warehouse = branchOffice.filter(e=> e.id != id )
+    setBranhOfficeDestination(warehouse)
+  }
 
   return (
     <>
@@ -527,8 +533,11 @@ const FormLayoutsSeparator = () => {
             <Autocomplete
             required
             onChange={(e, data) =>{setBranchOfficeSelected(data || [])
-              getWarehouse(data.id)
+              getWarehouse(data?.id)
               setWarehouseSelected('')
+              setBranchOfficeSelectedDestination('')
+              setWarehouseSelectedDestination('')
+              filterWarehouse(data?.id)
             }}
                 options={branchOffice}
                 id='autocomplete-outlined'
@@ -541,7 +550,7 @@ const FormLayoutsSeparator = () => {
             required
            
             onChange={(e, data) =>{setWarehouseSelected(data)
-              getAllProductsProvider(data.id)
+              getAllProductsProvider(data?.id)
             }}
                 options={warehouse}
                 value={warehouseSelected}
@@ -559,24 +568,29 @@ const FormLayoutsSeparator = () => {
             <Grid item xs={6} sm={6}>
             <Autocomplete
             required
-            onChange={(e, data) =>{setBranchOfficeSelectedDestination(data)
-              getWarehouseDestination(data.id )
+            onChange={(e, data) =>{setBranchOfficeSelectedDestination(data || '')
+              getWarehouseDestination(data?.id )
+              
             }}
-                options={branchOffice}
+            value={branchOfficeSelectedDestination}
+            disabled={!warehouseSelected}
+            options={branchOfficeDestiation}
                 id='autocomplete-outlined'
                 getOptionLabel={option => option.nombre || ''}
-                renderInput={params => <TextField {...params} required label='Sucursal' />}
+                renderInput={params => <TextField {...params} required 
+                label='Sucursal' />}
             />
             </Grid>
             <Grid item xs={6} sm={6}>
             <Autocomplete
             required
            
-            onChange={(e, data) =>{setWarehouseSelectedDestination(data)
+            onChange={(e, data) =>{setWarehouseSelectedDestination(data || '')
             }}
+            value={warehouseSelectedDestination}
                 options={warehouseDestination}
                 id='autocomplete-outlined'
-                disabled={warehouse.length == 0}
+                disabled={!branchOfficeSelectedDestination}
                 getOptionLabel={option => option.nombre || ''}
                 renderInput={params => <TextField {...params}  required label='Almacen' />}
             />

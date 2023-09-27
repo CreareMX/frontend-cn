@@ -264,7 +264,8 @@ const PersonsType = ({ apiData }) => {
 
     {
       flex: 0.25,
-      minWidth: 150,
+      minWidth: 500,
+      maxWidth:500,
       field: 'producto',
       headerName: 'Producto',
       renderCell: ({ row }) => {
@@ -289,6 +290,35 @@ const PersonsType = ({ apiData }) => {
         )
       }
     },
+    
+    {
+      flex: 0.25,
+      minWidth: 150,
+      field: 'cantidad',
+      headerName: 'Cantidad',
+      renderCell: ({ row }) => {
+
+  
+        return (
+          <Box sx={{ display: 'flex', alignItems: 'center' }}>
+            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent:'center', flexDirection: 'column' }}>
+              <Typography
+                noWrap
+                sx={{
+                  fontWeight: 500,
+                  textDecoration: 'none',
+                  color: 'text.secondary',
+                  '&:hover': { color: 'primary.main' }
+                }}
+              >
+                {row?.cantidad}
+              </Typography>
+            </Box>
+          </Box>
+        )
+      }
+    },
+
 
     // {
     //   flex: 0.25,
@@ -340,14 +370,14 @@ const PersonsType = ({ apiData }) => {
     //   }
     // },
   
-    {
-      flex: 0.1,
-      minWidth: 200,
-      sortable: false,
-      field: 'actions',
-      headerName: 'Acciones',
-      renderCell: ({ row }) => <RowOptions data={row} id={row.id} />
-    }
+    // {
+    //   flex: 0.1,
+    //   minWidth: 200,
+    //   sortable: false,
+    //   field: 'actions',
+    //   headerName: 'Acciones',
+    //   renderCell: ({ row }) => <RowOptions data={row} id={row.id} />
+    // }
   ]
 
 
