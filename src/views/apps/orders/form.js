@@ -418,7 +418,7 @@ const FormLayoutsSeparator = () => {
     }
   
     toast.success('Cotización realizada con éxito')
-    router.push('/orders')
+    router.push('/services')
 
   }
 
