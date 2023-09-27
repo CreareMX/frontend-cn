@@ -51,7 +51,7 @@ const TableHeader = props => {
 
         <Button onClick={toggle} variant='contained' sx={{ '& svg': { mr: 2 } }}>
           <Icon fontSize='1.125rem' icon='tabler:plus' />
-          Nuevo tipo de alamacen
+          Nuevo tipo de almacén 
         </Button>
       </Box>
     </Box>

@@ -247,7 +247,8 @@ const PersonsType = ({ apiData }) => {
     },
     {
       flex: 0.25,
-      minWidth: 160,
+      minWidth: 130,
+      maxWidth:130,
       field: 'fecha',
       headerName: 'Fecha',
       renderCell: ({ row }) => {
@@ -273,7 +274,8 @@ const PersonsType = ({ apiData }) => {
     },
     {
       flex: 0.25,
-      minWidth: 160,
+      minWidth: 140,
+      maxWidth:140,
       field: 'fechaEnvio',
       headerName: 'Fecha entrega',
       renderCell: ({ row }) => {
@@ -299,8 +301,8 @@ const PersonsType = ({ apiData }) => {
     },
     {
       flex: 0.25,
-      minWidth: 150,
-      maxWidth:150,
+      minWidth: 170,
+      maxWidth:170,
       field: 'cliente',
       headerName: 'Cliente',
       renderCell: ({ row }) => {
@@ -326,7 +328,8 @@ const PersonsType = ({ apiData }) => {
     },
     {
       flex: 0.25,
-      minWidth: 200,
+      minWidth: 130,
+      maxWidth:130,
       field: 'vendedor',
       headerName: 'Vendedor',
       renderCell: ({ row }) => {
@@ -352,9 +355,10 @@ const PersonsType = ({ apiData }) => {
     },
     {
       flex: 0.25,
-      minWidth: 200,
-      field: 'responsable',
-      headerName: 'Responsable',
+      minWidth: 140,
+      maxWidth:140,
+    field: 'instalador',
+      headerName: 'Instalador',
       renderCell: ({ row }) => {
   
         return (
@@ -378,8 +382,9 @@ const PersonsType = ({ apiData }) => {
     },
     {
       flex: 0.25,
-      minWidth: 200,
-      field: 'monto',
+      minWidth: 110,
+      maxWidth:110,
+     field: 'monto',
       headerName: 'Monto',
       renderCell: ({ row }) => {
   
@@ -404,7 +409,8 @@ const PersonsType = ({ apiData }) => {
     },
     {
       flex: 0.25,
-      minWidth: 200,
+      minWidth: 120,
+      maxWidth:120,
       field: 'estado',
       headerName: 'Estado',
       renderCell: ({ row }) => {

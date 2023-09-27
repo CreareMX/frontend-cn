@@ -127,11 +127,11 @@ const navigation = () => {
           path: '/quotes'
         },
         {
-          title: 'Pedidos',
-          path: '/orders'
+          title: 'Servicios',
+          path: '/services'
         },
         {
-          title: 'Asignación de pedidos',
+          title: 'Asignación de servicio',
           path: '/order-assignment'
         },
       ]

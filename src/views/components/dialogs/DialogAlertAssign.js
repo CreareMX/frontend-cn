@@ -33,9 +33,9 @@ const DialogAlert = ({open = false, handleClose, onConfirm, title = '', content=
    }
 
    const responsables = [
-    {id:1, nombre:'Responsable 1'},
-    {id:2, nombre:'Responsable 2'},
-    {id:3, nombre:'Responsable 3'}
+    {id:1, nombre:'Instalador 1'},
+    {id:2, nombre:'Instalador 2'},
+    {id:3, nombre:'Instalador 3'}
    ]
 
    const handleConfirm =()=>{
@@ -72,7 +72,7 @@ const DialogAlert = ({open = false, handleClose, onConfirm, title = '', content=
                 options={responsables}
                 id='autocomplete-outlined'
                 getOptionLabel={option => option?.nombre || ''}
-                renderInput={params => <TextField {...params}  label='Responsable' />}
+                renderInput={params => <TextField {...params}  label='Instalador' />}
             />
         </Grid>
         <DatePickerWrapper>

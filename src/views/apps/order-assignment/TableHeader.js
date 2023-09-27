@@ -41,7 +41,7 @@ const TableHeader = props => {
                   '&:hover': { color: 'primary.main' }
                 }}
               >
-                Asiganción de pedidos
+                Asignación de servicio
               </Typography>
       <Box sx={{ rowGap: 2, display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between' }}>
         <TextField

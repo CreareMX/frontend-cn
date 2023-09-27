@@ -477,7 +477,7 @@ const FormLayoutsSeparator = () => {
   return (
     <>
     <Card>
-      <CardHeader title='Pedido' />
+      <CardHeader title='Servicio' />
       <Divider sx={{ m: '0 !important' }} />
       <form onSubmit={handleSubmit(onSubmit)}>
         <CardContent>
@@ -506,7 +506,7 @@ const FormLayoutsSeparator = () => {
                 options={products}
                 id='autocomplete-outlined'
                 getOptionLabel={option => option?.producto?.nombre || ''}
-                renderInput={params => <TextField {...params}  label='Producto' />}
+                renderInput={params => <TextField {...params}  label='Producto/Servicio' />}
             />
             
             </Grid>
@@ -551,7 +551,7 @@ const FormLayoutsSeparator = () => {
         </CardContent>
         <Divider sx={{ m: '0 !important' }} />
         <CardActions style={{display:'flex', justifyContent:'flex-end'}}>
-          <Button onClick={()=> router.push('/orders')} size='large' variant='outlined'>
+          <Button onClick={()=> router.push('/services')} size='large' variant='outlined'>
             Cancelar
           </Button>
           <Button disabled={productList.length== 0} size='large' type='submit' sx={{ mr: 2 }} variant='contained'>

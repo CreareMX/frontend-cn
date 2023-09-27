@@ -229,7 +229,7 @@ const SidebarEditPeople = props => {
               rules={{ required: true }}
               render={({ field: { value, onChange } }) => (
                 <>
-                <InputLabel id='role-select'>Tipo de alamacen</InputLabel>
+                <InputLabel id='role-select'>Tipo de almacen</InputLabel>
                 <Select
                 fullWidth
                 id='select-role'

@@ -113,17 +113,17 @@ const FormLayoutsSeparator = () => {
       id:1,
       nombreProd:'ROLLO CABLE ETHERNET CAT 5 100MTS PANDUIT',
       proveedor: 'PROVEEDOR DE PRUEBA',
-      almacen: 'Mérida',
-      cantidadContada: 102,
-      CantidadSistem:  100
+      almacen: 'Almacén General',
+      cantidadContada: 2,
+      CantidadSistem:  2
     },
     {
       id:2,
       nombreProd:'CAMARA HIKVISION HD0001',
       proveedor: 'PROVEEDOR DE PRUEBA',
-      almacen: 'Mérida',
-      cantidadContada: 55,
-      CantidadSistem:  57
+      almacen: 'Almacén General',
+      cantidadContada: 10,
+      CantidadSistem:  9
     },
   ]
 

@@ -41,7 +41,7 @@ const TableHeader = props => {
                   '&:hover': { color: 'primary.main' }
                 }}
               >
-                Ajustes de alamacen
+                Ajustes de almacén 
               </Typography>
       <Box sx={{ rowGap: 2, display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between' }}>
         <TextField

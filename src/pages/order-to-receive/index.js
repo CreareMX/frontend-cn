@@ -206,7 +206,8 @@ const PersonsType = ({ apiData }) => {
     },
     {
       flex: 0.25,
-      minWidth: 280,
+      minWidth: 240,
+      maxWidth:240,
       field: 'proveedor',
       headerName: 'Proveedor',
       renderCell: ({ row }) => {
@@ -309,8 +310,8 @@ const PersonsType = ({ apiData }) => {
     // },
     {
       flex: 0.25,
-      minWidth: 150,
-      maxWidth:150,
+      minWidth: 180,
+      maxWidth:180,
       field: 'alamcen',
       headerName: 'Almacen',
       renderCell: ({ row }) => {
@@ -327,7 +328,7 @@ const PersonsType = ({ apiData }) => {
                   '&:hover': { color: 'primary.main' }
                 }}
               >
-                {row.idAlmacen == 3 ? 'Almacen general' : 'Mostrador'}
+                {row.idAlmacen == 1 ? 'Almacén General' : 'Mostrador'}
               </Typography>
             </Box>
           </Box>
