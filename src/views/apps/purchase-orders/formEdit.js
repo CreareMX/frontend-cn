@@ -66,8 +66,7 @@ import { deleteBranchOffice } from 'src/api/RequestApi'
 import toast from 'react-hot-toast'
 import Autocomplete from '@mui/material/Autocomplete'
 import { useForm, Controller } from 'react-hook-form'
-
-
+import Loader from 'src/views/components/loader/loader'
 
 // ** Data
 import { top100Films } from 'src/@fake-db/autocomplete'
@@ -192,15 +191,20 @@ const FormLayoutsSeparator = () => {
 }
 
 
-
+const getData=async()=> {
+  await getRequisition()
+  await  getAllOrderDetail()
+  await  getPeople()
+  await getWarehouse()
+  await  getbranchOffices()    
+  await getProductsbyProvider()
+  }
 
   useEffect(()=>{
-    getPeople()
-    getWarehouse()
-    getRequisition()
-    getbranchOffices()    
-    getAllOrderDetail()
-    getProductsbyProvider()
+    
+    if(router.query.id){
+    getData();
+  }
   },[router.query.id])
 
   const RowOptions = ({ id, data }) => {
@@ -546,7 +550,7 @@ const FormLayoutsSeparator = () => {
 
   return (
     <>
-    <Card>
+    <Card className='contenedor_principal'>
       <CardHeader title='Editar Requsision' />
       <Divider sx={{ m: '0 !important' }} />
       <form onSubmit={handleSubmit(onSubmit)}>

@@ -46,3 +46,13 @@ code[class*='language-'] {
 .css-mlse1l-MuiAutocomplete-listbox .MuiAutocomplete-option {
   padding: 12px 10px !important;
 }
+
+.spinner {
+	position: fixed;
+	width: 100vw;
+	height: 100vh;
+	z-index: 99;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
